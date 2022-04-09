@@ -84,7 +84,7 @@ class ViewModel {
 }
 ```
 
-Much better. Now we process all events sequentially but state update is still possible outside of the `updateState` method.
+Much better. Now we process all events sequentially but state updates are still possible outside of the `updateState` method.
 Ideally, state updates should be only allowed during event processing. 
 
 To achieve that we can implement a simple reducer using [runningFold](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/running-fold.html).
@@ -111,27 +111,27 @@ class ViewModel {
 }
 ```
 
-Now only `reduceState` method can perform state transformations.
+Now only the `reduceState` method can perform state transformations.
 
 ![Alt Text](https://media3.giphy.com/media/3oEjHYibHwRL7mrNyo/giphy.gif)
 
-When you look at this example ViewModel you may notice that only `reduceState` method contains important logic.
-Everything else is just a boilerplate that needs to be repeated for every new ViewModel.
+When you look at this example ViewModel you may notice that only the `reduceState` method contains important logic.
+Everything else is just boilerplate that needs to be repeated for every new ViewModel.
 
-As we all like to stay [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), I needed to find a way to extract generic logic outside.
+As we all like to stay [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), I needed to extract the generic logic from the ViewModel.
 
 That's how StateReducerFlow was born.
 
 ## :rocket: StateReducerFlow
 
-I wanted [StateReducerFlow](https://github.com/linean/StateReducerFlow/blob/main/app/src/main/java/com/example/statereducerflow/StateReducerFlow.kt) to be a [StateFlow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow) that can handle generic events. I've started with this definition:
+I wanted [StateReducerFlow](https://github.com/linean/StateReducerFlow/blob/main/app/src/main/java/com/example/statereducerflow/StateReducerFlow.kt) to be a [StateFlow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow) that can handle generic events. I started with this definition:
 ```
 interface StateReducerFlow<STATE, EVENT> : StateFlow<STATE> {
     fun handleEvent(event: EVENT)
 }
 ```
 
-Moving forward I've extracted my ViewModel logic to the new flow implementation:
+Moving forward I extracted my ViewModel logic to the new flow implementation:
 
 ```
 private class StateReducerFlowImpl<STATE, EVENT>(
