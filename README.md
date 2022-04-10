@@ -1,8 +1,8 @@
-# StateReducerFlow
+# All you need for MVI is Kotlin. How to reduce without a reducer?
 
 ## :scroll: Description
 
-This repository contains an article describing my attempt to implement a simple state reducer based on [Kotlin Flow](https://kotlinlang.org/docs/flow.html) and an example app that uses it.
+This repository contains [the article](https://maciej-sady.medium.com/all-you-need-for-mvi-is-kotlin-how-to-reduce-without-reducer-5e986856610f) describing my attempt to implement a simple state reducer based on [Kotlin Flow](https://kotlinlang.org/docs/flow.html) and an example app that uses it.
 
 ## :bulb: Motivation and Context
 
@@ -19,7 +19,7 @@ Playing with libraries like [MVICore](https://github.com/badoo/MVICore), [Mobius
 
 That's how [StateReducerFlow](https://github.com/linean/StateReducerFlow/blob/main/app/src/main/java/com/example/statereducerflow/StateReducerFlow.kt) was born. Let me explain how I've built it, how it works, and how you can use it.
 
-## :brain: Thinking process
+## :man_student: Thinking process
 
 _Please keep in mind that the following examples are simplified._
 
